@@ -21,7 +21,6 @@ import org.mockito.MockitoAnnotations;
 import com.example.rqchallenge.employees.exceptions.ResourceNotFoundException;
 import com.example.rqchallenge.employees.model.Employee;
 import com.example.rqchallenge.employees.repository.IEmployeeRepository;
-import com.example.rqchallenge.employees.service.EmployeeService;
 
 public class EmployeeServiceTest {
     private EmployeeService employeeService;
@@ -123,7 +122,7 @@ public class EmployeeServiceTest {
         doNothing().when(empRepo).deleteById(1L);
 
         String result = employeeService.deleteEmployee(id);
-        assertEquals("Success", result);
+        assertEquals("Successfully deleted employee", result);
         verify(empRepo, times(1)).deleteById(1L);
     }
 
@@ -134,7 +133,7 @@ public class EmployeeServiceTest {
         String id = "abc"; // Invalid ID
 
         String result = employeeService.deleteEmployee(id);
-        assertEquals("Failure", result);
+        assertEquals("Failure in deleting employee", result);
         verify(empRepo, times(0)).deleteById(anyLong());
     }
 }

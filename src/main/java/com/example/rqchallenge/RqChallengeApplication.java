@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 @EntityScan("com.example.rqchallenge.employees.model")
-@ComponentScan(basePackages = {"com.example.rqchallenge"})
+@ComponentScan(basePackages = { "com.example.rqchallenge" })
 public class RqChallengeApplication {
     public static void main(String[] args) {
         SpringApplication.run(RqChallengeApplication.class, args);

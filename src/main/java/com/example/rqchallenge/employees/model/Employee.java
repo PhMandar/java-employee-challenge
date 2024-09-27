@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "employees")
 public class Employee {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -76,6 +76,9 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee [Id = " + getId() + ", Name = " + getName() + ", Salary =" + getSalary() + ", Age= " + getAge() + "]";
+        return "Employee [Id = " + getId()
+                + ", Name = " + getName()
+                + ", Salary =" + getSalary()
+                + ", Age= " + getAge() + "]";
     }
 }

@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,8 +83,8 @@ public class EmployeeController implements IEmployeeController {
             throw new IllegalArgumentException("Invalid id : must be provided valid id");
         }
         String deleteEmployeeStatus = employeeService.deleteEmployee(id);
-        HttpStatus status = "Success".equalsIgnoreCase(deleteEmployeeStatus) ? HttpStatus.OK : HttpStatus.EXPECTATION_FAILED;
+        HttpStatus status = "Success".equalsIgnoreCase(deleteEmployeeStatus) ? HttpStatus.OK
+                : HttpStatus.EXPECTATION_FAILED;
         return new ResponseEntity<String>(deleteEmployeeStatus, status);
     }
-
 }

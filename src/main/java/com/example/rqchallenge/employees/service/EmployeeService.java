@@ -18,7 +18,7 @@ public class EmployeeService implements IEmployeeService {
 
     @Autowired
     public IEmployeeRepository empRepo;
-    
+
     public List<Employee> getAllEmployees() {
         logger.info("Calling getAllEmployees service call");
         List<Employee> employees = empRepo.findAll();
@@ -27,37 +27,40 @@ public class EmployeeService implements IEmployeeService {
     }
 
     public List<Employee> getEmployeesByNameSearch(String employeeName) {
+        logger.info("Calling getEmployeesByNameSearch service call");
         return empRepo.searchEmployeeByName(employeeName);
     }
-    
-    public Employee getEmployeeById(String id){
+
+    public Employee getEmployeeById(String id) {
         logger.info("Calling getEmployeeById service call for id : {}", id);
         return empRepo.findById(Long.parseLong(id))
                 .orElseThrow(() -> new ResourceNotFoundException("Requested employee with id : " + id + " not found"));
     }
-    
+
     public Double getHighestSalaryOfEmployees() {
+        logger.info("Calling getHighestSalaryOfEmployees service call");
         return empRepo.getHighestSalaryOfEmployees();
     }
-    
+
     public List<String> getTop10HighestEarningEmployeeNames() {
+        logger.info("Calling getTop10HighestEarningEmployeeNames service call");
         return empRepo.getTop10HighestEarningEmployeeNames();
     }
 
     public Employee createEmployee(String name, String salary, String age) {
         logger.info("Calling createEmployee service call for name : {}, salary : {}, age : {}", name, salary, age);
         Employee empToCreate = new Employee(name, Double.parseDouble(salary), Integer.parseInt(age));
-        Employee empCreated = empRepo.save(empToCreate);
-        return empCreated;
+        return empRepo.save(empToCreate);
     }
 
     public String deleteEmployee(String id) {
+        logger.info("Calling deleteEmployee service call");
         try {
             getEmployeeById(id);
             empRepo.deleteById(Long.parseLong(id));
         } catch (IllegalArgumentException iae) {
-            return "Failure";
+            return "Failure in deleting employee";
         }
-        return "Success";
+        return "Successfully deleted employee";
     }
 }

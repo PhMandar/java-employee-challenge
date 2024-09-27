@@ -29,3 +29,5 @@ Thumbs.db
 
 # Ignore local environment configuration files
 .env
+.gitlab-ci.yml
+.project
