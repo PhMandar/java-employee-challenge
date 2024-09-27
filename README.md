@@ -116,3 +116,16 @@ deleteEmployee(String id)
             "status": "success",
             "message": "successfully! deleted Record"
         }
+
+
+## To build project
+gradlew build
+# or
+gradlew clean build
+
+## To run project
+gradlew bootRun
+
+## To use docker to build and run use following commands :
+docker-compose build
+docker-compose up

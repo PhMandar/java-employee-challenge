@@ -17,6 +17,8 @@
 *.swp
 Thumbs.db
 
+# Other 
+/.gradle/
 /gradle/
 /.settings/
 /bin/
@@ -24,7 +26,6 @@ Thumbs.db
 # Ignore Spring Tool Suite files
 .springBeans
 .sts4-cache
-
 
 # Ignore local environment configuration files
 .env

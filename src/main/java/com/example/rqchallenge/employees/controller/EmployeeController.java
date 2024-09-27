@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.rqchallenge.employees.model.Employee;
 import com.example.rqchallenge.employees.service.EmployeeService;
+import com.example.rqchallenge.employees.util.EmployeesUtil;
 
 @RestController
 @RequestMapping("/employees/api/v1")
@@ -38,16 +39,16 @@ public class EmployeeController implements IEmployeeController {
     }
 
     @GetMapping("/search/{emp_name}")
-    public ResponseEntity<List<Employee>> getEmployeesByNameSearch(@Valid @PathVariable("emp_name") String emp_name) {
+    public ResponseEntity<List<Employee>> getEmployeesByNameSearch(@PathVariable("emp_name") String emp_name) {
         return ResponseEntity.ok(employeeService.getEmployeesByNameSearch(emp_name));
     }
 
     @GetMapping("/employees/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@Valid @PathVariable("id") String id) {
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") String id) {
         logger.info("Calling EmployeeController.getEmployeeById()");
         try {
             Integer.parseInt(id);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid id : must be provided valid id");
         }
         return ResponseEntity.ok(employeeService.getEmployeeById(id));
@@ -65,7 +66,7 @@ public class EmployeeController implements IEmployeeController {
 
     @PostMapping("/create")
     public ResponseEntity<Employee> createEmployee(@RequestBody Map<String, Object> employeeInput) {
-        validateEmployeeInputData(employeeInput);
+        EmployeesUtil.validateEmployeeInputData(employeeInput);
 
         String name = employeeInput.get("name").toString();
         String age = employeeInput.get("age").toString();
@@ -76,48 +77,8 @@ public class EmployeeController implements IEmployeeController {
         return new ResponseEntity<Employee>(empCreated, status);
     }
 
-    private void validateEmployeeInputData(Map<String, Object> employeeData) {
-        if(!employeeData.containsKey("name")) {
-            throw new IllegalArgumentException("Invalid name : Employee name is a mandatory field.");
-        } else {
-            String name = employeeData.get("name").toString();
-            if (name == null || name.isBlank()) {
-                throw new IllegalArgumentException("Invalid name: must be provided as a valid string.");
-            }
-        }
-
-        if(!employeeData.containsKey("age")) {
-            throw new IllegalArgumentException("Invalid age : Employee age is a mandatory field.");
-        } else {
-            String age = employeeData.get("age").toString();
-            try {
-                Integer empAge = Integer.parseInt(age);
-                if(empAge <= 0) {
-                    throw new IllegalArgumentException("Invalid age: must be provided as a valid age.");
-                }
-            } catch (NumberFormatException nfe) {
-                throw new IllegalArgumentException("Invalid age: must be provided as positive number.");
-            }
-        }
-        
-        if(!employeeData.containsKey("salary")) {
-            throw new IllegalArgumentException("Invalid salary : Employee salary is a mandatory field.");
-        } else {
-            String salary = employeeData.get("salary").toString();
-            try {
-                Double empSalary = Double.parseDouble(salary);
-    
-                if (empSalary < 0) {
-                    throw new IllegalArgumentException("Invalid salary: must be provided as valid number.");
-                }    
-            } catch (Exception e) {
-                throw new IllegalArgumentException("Invalid salary: must be provided as valid number.");
-            }
-        }
-    }
-
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteEmployeeById(@Valid @PathVariable("id") String id) {
+    public ResponseEntity<String> deleteEmployeeById(@PathVariable("id") String id) {
         try {
             Integer.parseInt(id);
         } catch (Exception e) {

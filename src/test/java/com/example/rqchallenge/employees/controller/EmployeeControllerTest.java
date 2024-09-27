@@ -1,4 +1,4 @@
-package com.example.rqchallenge.controller;
+package com.example.rqchallenge.employees.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
