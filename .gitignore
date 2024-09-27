@@ -1,0 +1,30 @@
+/.metadata/
+
+# ignoring docker build files
+/build/
+
+# ignoring vs-code files
+/.vscode/
+/.idea/
+
+# ignore compiled class files.
+*.class
+
+# ignore all temporary files
+*.log
+*.tmp
+*.bak
+*.swp
+Thumbs.db
+
+/gradle/
+/.settings/
+/bin/
+
+# Ignore Spring Tool Suite files
+.springBeans
+.sts4-cache
+
+
+# Ignore local environment configuration files
+.env

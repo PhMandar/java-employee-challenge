@@ -53,6 +53,7 @@ public class EmployeeService implements IEmployeeService {
 
     public String deleteEmployee(String id) {
         try {
+            getEmployeeById(id);
             empRepo.deleteById(Long.parseLong(id));
         } catch (IllegalArgumentException iae) {
             return "Failure";

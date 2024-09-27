@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "0ee13ee0-cada-499f-9c77-705f1580b4ed",
+		"name": "EmployeeChallenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6567365"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/employees/api/v1/employees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/employees/api/v1/employees/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employees",
+						"api",
+						"v1",
+						"employees",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/employees/api/v1/employees/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/employees/api/v1/employees/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employees",
+						"api",
+						"v1",
+						"employees",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/employees/api/v1/search/Mandar",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/employees/api/v1/search/Mandar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employees",
+						"api",
+						"v1",
+						"search",
+						"Mandar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/employees/api/v1/topTenHighestEarningEmployeeNames",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/employees/api/v1/topTenHighestEarningEmployeeNames",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employees",
+						"api",
+						"v1",
+						"topTenHighestEarningEmployeeNames"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/employees/api/v1/topTenHighestEarningEmployeeNames Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/employees/api/v1/highestSalary",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employees",
+						"api",
+						"v1",
+						"highestSalary"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/cloudvendor Copy 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Advait\",\r\n    \"age\" : \"10\",\r\n    \"salary\" : \"10000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/employees/api/v1/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employees",
+						"api",
+						"v1",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/cloudvendor Copy 4",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\" : \"1\",\r\n    \"name\" : \"AWS_US\",\r\n    \"address\" : \"home\",\r\n    \"phoneNumber\" : \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/cloudvendor/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cloudvendor",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

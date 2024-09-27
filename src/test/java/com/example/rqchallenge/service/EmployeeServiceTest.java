@@ -116,6 +116,9 @@ public class EmployeeServiceTest {
 
     @Test
     void deleteEmployee_ValidId_ShouldReturnSuccess() {
+        Employee employee = new Employee("John Doe", 50000.0, 30);
+        when(empRepo.findById(anyLong())).thenReturn(Optional.of(employee));
+
         String id = "1";
         doNothing().when(empRepo).deleteById(1L);
 
@@ -126,6 +129,8 @@ public class EmployeeServiceTest {
 
     @Test
     void deleteEmployee_InvalidId_ShouldReturnFailure() {
+        Employee employee = new Employee("John Doe", 50000.0, 30);
+        when(empRepo.findById(anyLong())).thenReturn(Optional.of(employee));
         String id = "abc"; // Invalid ID
 
         String result = employeeService.deleteEmployee(id);
