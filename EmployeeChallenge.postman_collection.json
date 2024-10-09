@@ -98,7 +98,7 @@
 			"response": []
 		},
 		{
-			"name": "Find Highest Salaried Employee",
+			"name": "Find Highest Salary",
 			"request": {
 				"method": "GET",
 				"header": [],
