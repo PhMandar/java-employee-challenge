@@ -29,7 +29,6 @@ public class EmployeeControllerTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         employeeController = new EmployeeController();
-        // employeeController.employeeService = employeeService;
         employeeController.apiService = apiService;
     }
 

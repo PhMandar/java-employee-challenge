@@ -30,17 +30,10 @@ public class ApiService {
     private RestTemplate restTemplate;
 
     @Value("${third.party.api.url}")
-    private String apiUrl;
-
-    // public Employee callThirdPartyApi(String id) {
-    // logger.info("Calling rest api endpoint for searching employee by id : " +
-    // id);
-    // String url = apiUrl + id;
-    // return restTemplate.getForObject(url, Employee.class);
-    // }
+    public String apiUrl;
 
     public String deleteEmployee(String id) {
-        logger.info("Calling rest api endpoint for deleting employee by id : " + id);
+        logger.info("ApiService.deleteEmployee() with id : {}", id);
         String urlToDeleteEmployee = apiUrl + id;
         String resp = "Failed";
         try {
@@ -55,7 +48,7 @@ public class ApiService {
     }
 
     public Employee createEmployee(String pName, String pSalary, String pAge) {
-        logger.info("Calling rest api endpoint for creating employee");
+        logger.info("ApiService.createEmployee()");
         Employee objEmployee = restTemplate.postForObject(apiUrl,
                 new Employee(pName, Double.parseDouble(pSalary), Integer.parseInt(pAge)), Employee.class);
         if (objEmployee != null) {
@@ -65,12 +58,13 @@ public class ApiService {
     }
 
     public Employee getEmployeeById(String id) {
-        logger.info("Calling getEmployeeById using endpoint for getting employee by id : " + id);
+        logger.info("ApiService.getEmployeeById() with id : {}", id);
         String url = apiUrl + id;
         return restTemplate.getForObject(url, Employee.class);
     }
 
     public List<Employee> getEmployeesByNameSearch(String targetName) {
+        logger.info("ApiService.getEmployeesByNameSearch() with name : {}", targetName);
         List<Employee> employees = getAllEmployees();
         
         List<Employee> matchingEmployees = employees.stream()
@@ -81,13 +75,10 @@ public class ApiService {
     }
 
     public List<Employee> getAllEmployees() {
-        logger.info("\nCalling rest api endpoint for all employees\n");
-        
+        logger.info("ApiService.getAllEmployees()");
         Employee[] employees = null;
-
         try {
             ResponseEntity<Employee[]> empArrayResp = restTemplate.getForEntity(apiUrl, Employee[].class);
-
             if (empArrayResp != null) {
                 if (empArrayResp.getBody() != null) {
                     employees = empArrayResp.getBody();
@@ -102,31 +93,32 @@ public class ApiService {
             return Collections.emptyList();
         }
         
-        if(employees != null) {
-            return Arrays.asList(employees);
-        } else {
-            return Collections.emptyList();
-        }
+        return (employees != null) ? Arrays.asList(employees) : Collections.emptyList(); 
+        // if(employees != null) {
+        //     return Arrays.asList(employees);
+        // } else {
+        //     return Collections.emptyList();
+        // }
     }
 
     public Double getHighestSalaryOfEmployees() {
+        logger.info("ApiService.getHighestSalaryOfEmployees()");
         List<Employee> employees = getAllEmployees();
-        logger.info("\n\n~~~~~~~~~~~~ Got list of employees with size : {} ~~~~~~~~~~~~\n\n", employees.size());
+        logger.info("Got list of employees with size : {}", employees.size());
         double highestSalary = employees.stream()
                 .mapToDouble(Employee::getSalary)
                 .max()
                 .orElse(0);
-
-        logger.info("\n\n~~~~~~~~~~~~ Higest salary : {} ~~~~~~~~~~~~\n\n", highestSalary);
+        logger.info("Higest salary : {}", highestSalary);
         return highestSalary;
     }
 
     public List<String> getTopTenHigestEarningEmployeeNames() {
+        logger.info("ApiService.getTopTenHigestEarningEmployeeNames()");
         List<Employee> employees = getAllEmployees();
-        logger.info("\n\n~~~~~~~~~~~~ Got list of employees with size : {} ~~~~~~~~~~~~\n\n", employees.size());
-        
+        logger.info("Got list of employees with size : {}", employees.size());
         PriorityQueue<Employee> topEmployees = new PriorityQueue<>(Comparator.comparingDouble(Employee::getSalary));
-        logger.info("\n\n~~~~~~~~~~~~ getting top ten higest earning employee names ~~~~~~~~~~~~\n\n");
+        logger.info("Getting top ten higest earning employee names");
         
         employees.forEach(employee -> {
             topEmployees.offer(employee);
@@ -135,10 +127,9 @@ public class ApiService {
             }
         });
 
-        List<String> topEarningEmployeeNames = topEmployees.stream()
+        return topEmployees.stream()
             .sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
             .map(Employee::getName)
             .collect(Collectors.toList());
-        return topEarningEmployeeNames;
     }
 }

@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:8080/employees/api/v1/employees",
+			"name": "Get All Employees",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -30,12 +30,12 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/employees/api/v1/employees/1",
+			"name": "Employee By Id",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/employees/api/v1/employees/2",
+					"raw": "http://localhost:8080/employees/api/v1/employees/13",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -46,19 +46,19 @@
 						"api",
 						"v1",
 						"employees",
-						"2"
+						"13"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/employees/api/v1/search/Mandar",
+			"name": "Search Employee By Name",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/employees/api/v1/search/Mandar",
+					"raw": "http://localhost:8080/employees/api/v1/search/Dhondiba",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -69,14 +69,14 @@
 						"api",
 						"v1",
 						"search",
-						"Mandar"
+						"Dhondiba"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/employees/api/v1/topTenHighestEarningEmployeeNames",
+			"name": "Top Ten Highest Earning Employee Names",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -98,7 +98,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/employees/api/v1/topTenHighestEarningEmployeeNames Copy",
+			"name": "Find Highest Salaried Employee",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -120,13 +120,13 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/cloudvendor Copy 2",
+			"name": "Create Employee",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"Advait\",\r\n    \"age\" : \"10\",\r\n    \"salary\" : \"10000\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Dhondiba\",\r\n    \"salary\": 110000.0,\r\n    \"age\": 15\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -151,29 +151,23 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:8080/cloudvendor Copy 4",
+			"name": "Delete Employee",
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\" : \"1\",\r\n    \"name\" : \"AWS_US\",\r\n    \"address\" : \"home\",\r\n    \"phoneNumber\" : \"123456\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://localhost:8080/cloudvendor/1",
+					"raw": "http://localhost:8080/employees/api/v1/delete/11",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"cloudvendor",
-						"1"
+						"employees",
+						"api",
+						"v1",
+						"delete",
+						"11"
 					]
 				}
 			},

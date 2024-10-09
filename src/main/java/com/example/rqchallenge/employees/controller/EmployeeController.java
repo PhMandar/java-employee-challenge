@@ -30,78 +30,10 @@ public class EmployeeController implements IEmployeeController {
     @Autowired
     public ApiService apiService;
 
-    /*@GetMapping("/employees")
-    public ResponseEntity<List<Employee>> getAllEmployees() throws IOException {
-        logger.info("Calling EmployeeController.getAllEmployees()");
-        return new ResponseEntity<List<Employee>>(employeeService.getAllEmployees(), HttpStatus.OK);
-    }
-
-    @GetMapping("/search/{emp_name}")
-    public ResponseEntity<List<Employee>> getEmployeesByNameSearch(@PathVariable("emp_name") String emp_name) {
-        return ResponseEntity.ok(employeeService.getEmployeesByNameSearch(emp_name));
-    }
-
-    @GetMapping("/employees/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") String id) {
-        logger.info("Calling EmployeeController.getEmployeeById()");
-        try {
-            Integer.parseInt(id);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid id : must be provided valid id");
-        }
-        return ResponseEntity.ok(employeeService.getEmployeeById(id));
-    }
-
-    @GetMapping("/employees/api/{id}")
-    public ResponseEntity<Employee> getEmployeeByIdUsingEndPoint(@PathVariable("id") String id) {
-        logger.info("Calling EmployeeController.getEmployeeById()");
-        try {
-            Integer.parseInt(id);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid id : must be provided valid id");
-        }
-        return ResponseEntity.ok(employeeService.getEmployeeByIdUsingEndPoint(id));
-    }
-    
-    @GetMapping("/highestSalary")
-    public ResponseEntity<Double> getHighestSalaryOfEmployees() {
-        return ResponseEntity.ok(employeeService.getHighestSalaryOfEmployees());
-    }
-
-    @GetMapping("/topTenHighestEarningEmployeeNames")
-    public ResponseEntity<List<String>> getTopTenHighestEarningEmployeeNames() {
-        return ResponseEntity.ok(employeeService.getTop10HighestEarningEmployeeNames());
-    }
-
-    @PostMapping("/create")
-    public ResponseEntity<Employee> createEmployee(@RequestBody Map<String, Object> employeeInput) {
-        EmployeesUtil.validateEmployeeInputData(employeeInput);
-
-        String name = employeeInput.get("name").toString();
-        String age = employeeInput.get("age").toString();
-        String salary = employeeInput.get("salary").toString();
-
-        Employee empCreated = employeeService.createEmployee(name, salary, age);
-        HttpStatus status = empCreated != null ? HttpStatus.CREATED : HttpStatus.valueOf(501);
-        return new ResponseEntity<Employee>(empCreated, status);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteEmployeeById(@PathVariable("id") String id) {
-        try {
-            Integer.parseInt(id);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Invalid id : must be provided valid id");
-        }
-        String deleteEmployeeStatus = employeeService.deleteEmployee(id);
-        HttpStatus status = "Success".equalsIgnoreCase(deleteEmployeeStatus) ? HttpStatus.OK
-                : HttpStatus.EXPECTATION_FAILED;
-        return new ResponseEntity<String>(deleteEmployeeStatus, status);
-    }*/
-
     @PostMapping("/create")
     @Override
     public ResponseEntity<Employee> createEmployee(@RequestBody Map<String, Object> employeeInput) {
+        logger.info("EmployeeController.createEmployee()");
         EmployeesUtil.validateEmployeeInputData(employeeInput);
 
         String name = employeeInput.get("name").toString();
@@ -116,14 +48,14 @@ public class EmployeeController implements IEmployeeController {
     @DeleteMapping("/delete/{id}")
     @Override
     public ResponseEntity<String> deleteEmployeeById(@PathVariable("id") String id) {
-        logger.info("\n\n Calling delete employee from employee controller ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n\n");
+        logger.info("EmployeeController.deleteEmployeeById()");
         try {
             Integer.parseInt(id);
         } catch (Exception e) {
             throw new IllegalArgumentException("Invalid id : must be provided valid id");
         }
         String deleteEmployeeStatus = apiService.deleteEmployee(id);
-        logger.info("\n\n ######Delete Employee Status : {}", deleteEmployeeStatus);
+        logger.info("Delete Employee Status : {}", deleteEmployeeStatus);
         HttpStatus status = "Success".equalsIgnoreCase(deleteEmployeeStatus) ? HttpStatus.OK
                 : HttpStatus.EXPECTATION_FAILED;
         return new ResponseEntity<String>(deleteEmployeeStatus, status);
@@ -132,14 +64,14 @@ public class EmployeeController implements IEmployeeController {
     @GetMapping("/employees")
     @Override
     public ResponseEntity<List<Employee>> getAllEmployees() throws IOException {
-        logger.info("Calling EmployeeController.getAllEmployees()");
+        logger.info("EmployeeController.getAllEmployees()");
         return new ResponseEntity<List<Employee>>(apiService.getAllEmployees(), HttpStatus.OK);
     }
 
     @GetMapping("/employees/{id}")
     @Override
     public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") String id) {
-        logger.info("Calling EmployeeController.getEmployeeById()");
+        logger.info("EmployeeController.getEmployeeById()");
         try {
             Integer.parseInt(id);
         } catch (NumberFormatException e) {
@@ -150,21 +82,22 @@ public class EmployeeController implements IEmployeeController {
 
     @GetMapping("/search/{emp_name}")
     @Override
-    public ResponseEntity<List<Employee>> getEmployeesByNameSearch(@PathVariable("emp_name") String emp_name) {
-        return ResponseEntity.ok(apiService.getEmployeesByNameSearch(emp_name));
+    public ResponseEntity<List<Employee>> getEmployeesByNameSearch(@PathVariable("emp_name") String empName) {
+        logger.info("EmployeeController.getEmployeesByNameSearch() with employee name : {}", empName);
+        return ResponseEntity.ok(apiService.getEmployeesByNameSearch(empName));
     }
 
     @GetMapping("/highestSalary")
     @Override
     public ResponseEntity<Double> getHighestSalaryOfEmployees() {
-        logger.info("\n apiService.getHighestSalaryOfEmployees()");
+        logger.info("EmployeeController.getHighestSalaryOfEmployees()");
         return ResponseEntity.ok(apiService.getHighestSalaryOfEmployees());
     }
 
     @GetMapping("/topTenHighestEarningEmployeeNames")
     @Override
     public ResponseEntity<List<String>> getTopTenHighestEarningEmployeeNames() {
-        logger.info("\n apiService.getTopTenHighestEarningEmployeeNames()");
+        logger.info("EmployeeController.getTopTenHighestEarningEmployeeNames()");
         return ResponseEntity.ok(apiService.getTopTenHigestEarningEmployeeNames());
     }
 }
