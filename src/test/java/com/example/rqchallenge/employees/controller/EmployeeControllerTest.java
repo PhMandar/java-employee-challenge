@@ -16,27 +16,27 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.example.rqchallenge.employees.controller.EmployeeController;
 import com.example.rqchallenge.employees.model.Employee;
-import com.example.rqchallenge.employees.service.EmployeeService;
+import com.example.rqchallenge.employees.service.ApiService;
 
 public class EmployeeControllerTest {
     private EmployeeController employeeController;
 
     @Mock
-    private EmployeeService employeeService;
+    private ApiService apiService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
         employeeController = new EmployeeController();
-        employeeController.employeeService = employeeService;
+        // employeeController.employeeService = employeeService;
+        employeeController.apiService = apiService;
     }
 
     @Test
     void getAllEmployees_ShouldReturnListOfEmployees() throws Exception {
         List<Employee> employees = Arrays.asList(new Employee("John Doe", 50000.0, 30));
-        when(employeeService.getAllEmployees()).thenReturn(employees);
+        when(apiService.getAllEmployees()).thenReturn(employees);
 
         ResponseEntity<List<Employee>> response = employeeController.getAllEmployees();
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -47,7 +47,7 @@ public class EmployeeControllerTest {
     void getEmployeesByNameSearch_ShouldReturnEmployeeList() {
         String name = "John";
         List<Employee> employees = Arrays.asList(new Employee("John Doe", 50000.0, 30));
-        when(employeeService.getEmployeesByNameSearch(name)).thenReturn(employees);
+        when(apiService.getEmployeesByNameSearch(name)).thenReturn(employees);
 
         ResponseEntity<List<Employee>> response = employeeController.getEmployeesByNameSearch(name);
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -58,7 +58,7 @@ public class EmployeeControllerTest {
     void getEmployeeById_ValidId_ShouldReturnEmployee() {
         String id = "1";
         Employee employee = new Employee("John Doe", 50000.0, 30);
-        when(employeeService.getEmployeeById(id)).thenReturn(employee);
+        when(apiService.getEmployeeById(id)).thenReturn(employee);
 
         ResponseEntity<Employee> response = employeeController.getEmployeeById(id);
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -73,7 +73,7 @@ public class EmployeeControllerTest {
         employeeInput.put("salary", "50000");
 
         Employee createdEmployee = new Employee("John Doe", 50000.0, 30);
-        when(employeeService.createEmployee("John Doe", "50000", "30")).thenReturn(createdEmployee);
+        when(apiService.createEmployee("John Doe", "50000", "30")).thenReturn(createdEmployee);
 
         ResponseEntity<Employee> response = employeeController.createEmployee(employeeInput);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -96,7 +96,7 @@ public class EmployeeControllerTest {
     @Test
     void deleteEmployeeById_ValidId_ShouldReturnSuccess() {
         String id = "1";
-        when(employeeService.deleteEmployee(id)).thenReturn("Success");
+        when(apiService.deleteEmployee(id)).thenReturn("Success");
 
         ResponseEntity<String> response = employeeController.deleteEmployeeById(id);
         assertEquals(HttpStatus.OK, response.getStatusCode());

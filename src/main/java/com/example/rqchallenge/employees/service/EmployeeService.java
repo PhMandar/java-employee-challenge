@@ -19,6 +19,14 @@ public class EmployeeService implements IEmployeeService {
     @Autowired
     public IEmployeeRepository empRepo;
 
+    @Autowired
+    public ApiService apiService;
+
+    public Employee getEmployeeByIdUsingEndPoint(String id) {
+        logger.info("Calling getEmployeeById service call for id using end points : {}", id);
+        return null; //apiService.callThirdPartyApi(id);
+    }
+
     public List<Employee> getAllEmployees() {
         logger.info("Calling getAllEmployees service call");
         List<Employee> employees = empRepo.findAll();
